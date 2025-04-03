@@ -121,7 +121,6 @@ export class ListagemProdutosComponent implements OnInit {
     filtros.priceLessThan = this.formatarPreco(filtros.priceLessThan);
     this.carregando = true;
     if ((this.nenhumResultado = true)) this.nenhumResultado = false;
-    console.log(filtros);
     this.ApiService.getFiltro<Produto[]>(
       UrlProdutos.ObterTodos,
       filtros

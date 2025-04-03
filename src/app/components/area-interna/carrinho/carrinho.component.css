@@ -1,0 +1,122 @@
+.carrinho-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+  h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: #333;
+  }
+
+  .produto {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+
+
+    img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .detalhes {
+      flex: 1;
+
+      h3 {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+
+      p {
+        color: #666;
+        margin: 0.5rem 0;
+      }
+
+
+      .quantidade {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 0.5rem;
+
+        button {
+          width: 32px;
+          height: 32px;
+          border: none;
+          background: #f0f0f0;
+          font-size: 1.2rem;
+          border-radius: 50%;
+          cursor: pointer;
+          transition: 0.2s;
+
+          &:hover {
+            background: #ddd;
+          }
+        }
+
+        span {
+          width: 24px;
+          text-align: center;
+        }
+      }
+
+      .remover {
+        margin-top: 0.5rem;
+        background: transparent;
+        color: #e63946;
+        border: none;
+        cursor: pointer;
+      }
+    }
+  }
+  .cores {
+    display: flex;
+    gap: 8px;
+    margin: 10px 0;
+  }
+
+  .cor {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    transition: transform 0.2s ease-in-out, border-color 0.2s;
+  }
+
+
+  .total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+  }
+
+  .finalizar {
+    width: 100%;
+    padding: 1rem;
+    background: #0077ff;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: 0.3s;
+  }
+}
+
+.vazio {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #777;
+  margin-top: 3rem;
+}

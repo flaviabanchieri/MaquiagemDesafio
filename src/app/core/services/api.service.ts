@@ -34,7 +34,7 @@ export class ApiService {
 
   getItems<T>(caminho: string): Observable<T> {
     return this.http.get<T>(this.apiUrl + `${caminho}`, {
-      headers: Helpers.getHttpHeadersSemToken(),
+      headers: Helpers.getHttpHeaders(),
     });
   }
 
@@ -42,7 +42,7 @@ export class ApiService {
     var filtros = this.prepararParametros(filtro);
     console.log(filtros);
     return this.http.get<T>(this.apiUrl + `${caminho}` + filtros, {
-      headers: Helpers.getHttpHeadersSemToken(),
+      headers: Helpers.getHttpHeaders(),
     });
   }
 

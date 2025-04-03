@@ -1,3 +1,48 @@
-<p>
-  carrinho works!
-</p>
+<div class="carrinho-container" *ngIf="produtos.length; else vazio">
+  <h2>Meu Carrinho</h2>
+
+  <div class="produto" *ngFor="let carrinho of produtos">
+    <img class="imagem-produto " [src]="carrinho.produto.api_featured_image"  />
+    <div class="detalhes">
+      <div class="topo">
+        <div>
+          <h3>{{ carrinho.produto.name }}</h3>
+          <small>{{ carrinho.produto.brand }}</small>
+        </div>
+        <button class="remover" (click)="remover(carrinho)">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </div>
+
+      <div class="cores" *ngIf="carrinho.corEscolhidaHex?.length">
+        <div *ngFor="let cor of carrinho.corEscolhidaHex"
+             class="cor"
+             [style.background-color]="cor"
+             [title]="cor">
+        </div>
+      </div>
+
+
+      <div class="quantidade">
+        <button (click)="diminuir(carrinho)">−</button>
+        <span>{{ carrinho.quantidade }}</span>
+        <button (click)="aumentar(carrinho)">+</button>
+      </div>
+
+      <div class="preco">
+        {{ parsePreco(carrinho.produto.price) * carrinho.quantidade | currency:'BRL':'symbol' }}
+      </div>
+    </div>
+  </div>
+
+  <div class="resumo">
+    <span>Total:</span>
+    <strong>{{ total | currency:'BRL' }}</strong>
+  </div>
+
+  <button class="finalizar">Finalizar Compra</button>
+</div>
+
+<ng-template #vazio>
+  <p class="vazio">Seu carrinho está vazio 🛒</p>
+</ng-template>
