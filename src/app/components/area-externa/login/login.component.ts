@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { AuthService } from "../../../auth/auth.service";
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   usuarioVazio = false;
   senhaIncorreta: boolean = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
       user: ['', [Validators.required]],
       password: ['', [Validators.required]]
@@ -38,6 +39,7 @@ export class LoginComponent implements OnInit {
 
         if (response.status === 200) {
           this.senhaIncorreta = false;
+          this.router.navigate(['/listagem']);
         } else {
           this.senhaIncorreta = true;
         }
