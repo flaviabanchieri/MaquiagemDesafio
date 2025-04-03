@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.loginForm = this.fb.group({
       user: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required]]
     });
   }
 
@@ -33,10 +33,15 @@ export class LoginComponent implements OnInit {
       const username = this.loginForm.get('user')?.value;
       const password = this.loginForm.get('password')?.value;
       console.log(username, password)
-      if (this.authService.login(username, password)) {
-      } else {
-        this.senhaIncorreta = true;
-      }
+      this.authService.login(username, password).subscribe(response => {
+        console.log(`Status: ${response.status}, Mensagem: ${response.mensagem}`);
+
+        if (response.status === 200) {
+          this.senhaIncorreta = false;
+        } else {
+          this.senhaIncorreta = true;
+        }
+      });
     } else {
       this.senhaIncorreta = true;
     }

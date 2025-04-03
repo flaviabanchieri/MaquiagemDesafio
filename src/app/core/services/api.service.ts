@@ -1,9 +1,8 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable, catchError, of } from "rxjs";
-import { Helpers } from "../../helpers/helpers";
-import { TagsDictionary } from "../models/tags";
-
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, catchError, map, of } from 'rxjs';
+import { Helpers } from '../../helpers/helpers';
+import { TagsDictionary } from '../models/tags';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +36,22 @@ export class ApiService {
     return this.http.get<T>(this.apiUrl + `${caminho}` + filtros, {
       headers: Helpers.getHttpHeadersSemToken(),
     });
+  }
+
+  postItems(caminho : string, objeto: any) {
+    return this.http
+      .post(this.apiUrl + `${caminho}`, Helpers.toJson(objeto), {
+        headers: Helpers.getHttpHeaders(),
+      })
+      .pipe(map((res) => res));
+  }
+
+  postItemsSemToken(caminho : string, objeto: any) {
+    return this.http
+      .post(this.apiUrl + `${caminho}`, Helpers.toJson(objeto), {
+        headers: Helpers.getHttpHeadersSemToken(),
+      })
+      .pipe(map((res) => res));
   }
 
   private prepararParametros(filtro: any): string {
