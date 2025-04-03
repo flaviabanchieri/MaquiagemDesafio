@@ -13,7 +13,15 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   getMarcas(): Observable<string[]> {
-    return this.http.get<string[]>(`${this.apiUrl}produtos/brands`);
+    return this.http.get<string[]>(`${this.apiUrl}produtos/marcas`);
+  }
+
+  getCategorias(): Observable<TagsDictionary> {
+    return this.http.get<TagsDictionary>(`${this.apiUrl}produtos/categorias`).pipe(
+      catchError((error) => {
+        return of({});
+      })
+    );
   }
 
   getTags(): Observable<TagsDictionary> {
@@ -39,6 +47,7 @@ export class ApiService {
   }
 
   postItems(caminho : string, objeto: any) {
+    console.log('entrou aqui')
     return this.http
       .post(this.apiUrl + `${caminho}`, Helpers.toJson(objeto), {
         headers: Helpers.getHttpHeaders(),

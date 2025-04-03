@@ -7,6 +7,7 @@ import { PaginaErroComponent } from './components/area-externa/pagina-erro/pagin
 import { CarrinhoComponent } from './components/area-interna/carrinho/carrinho.component';
 import { MeusPedidosComponent } from './components/area-interna/meus-pedidos/meus-pedidos.component';
 import { PagamentoComponent } from './components/area-interna/pagamento/pagamento.component';
+import { CadastroComponent } from './components/area-externa/cadastro/cadastro.component';
 
 export const routes: Routes = [
   {
@@ -20,6 +21,10 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'cadastro',
+    component: CadastroComponent
   },
 
   {

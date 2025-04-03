@@ -2,9 +2,11 @@ import { HttpHeaders } from '@angular/common/http';
 
 export class Helpers {
   static getHttpHeaders(): HttpHeaders {
-    return new HttpHeaders()
+    var retorno = new HttpHeaders()
       .set('Content-Type', 'application/json')
-      .set('Authorization', 'Bearer ' + sessionStorage.getItem('token'));
+      .set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+      console.log(retorno);
+      return retorno;
   }
 
   static getHttpHeadersSemToken(): HttpHeaders {
@@ -12,7 +14,10 @@ export class Helpers {
   }
 
   static toJson(model: any): any {
-    return JSON.stringify(model, this.removeNullValues);
+    var json = JSON.stringify(model, this.removeNullValues);
+    console.log(json)
+    return json;
+
   }
 
   private static removeNullValues(key: any, value: any) {

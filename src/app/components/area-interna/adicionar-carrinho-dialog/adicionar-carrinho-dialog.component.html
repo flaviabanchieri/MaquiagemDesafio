@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="container-imagem-produto">
+    <img [src]="produto.api_featured_image" [alt]="produto.name" class="imagem-produto"
+      (error)="produto.image_link = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTC_13ebLeTd0rsVIplte6zH-EEqleIiGuw6A&s'" />
+    <div *ngIf="produto.rating" class="avaliacao-produto">
+      <span class="valor-avaliacao">{{ produto.rating }}</span>
+      <i class="fas fa-star"></i>
+    </div>
+  </div>
+
+  <div class="conteudo-produto">
+    <div class="cabecalho-produto">
+      <h2 class="nome-produto">{{ produto.name }}</h2>
+      <span class="marca-produto">{{ produto.brand }}</span>
+    </div>
+
+    <p class="descricao-produto">{{ produto.description || 'Descrição não disponível' }}</p>
+
+    <div class="cores-produto" *ngIf="produto.product_colors?.length">
+      <div class="pontos-cor">
+        <div *ngFor="let cor of produto.product_colors" class="ponto-cor"
+          [ngClass]="corSelecionada(cor.hex_value)" [style.background-color]="cor.hex_value"
+          [title]="cor.colour_name" (click)="selecionarCor(cor.hex_value)">
+        </div>
+      </div>
+    </div>
+
+    <div class="quantidade-produto">
+      <label>Quantidade:</label>
+      <input [value]="quantidade" type="number" min="1" (change)="alterarQuantidade($event)">
+    </div>
+
+    <div class="rodape-produto">
+      <span class="preco-produto">{{ produto.price | currency:'$ ' }}</span>
+      <div class="acoes-produto">
+        <button class="botao-favorito" title="Adicionar à lista de desejos">
+          <i class="far fa-heart"></i>
+        </button>
+        <button (click)="adicionar()" class="botao-adicionar">
+          <i class="fas fa-shopping-cart"></i> Adicionar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

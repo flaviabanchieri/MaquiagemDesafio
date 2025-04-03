@@ -15,9 +15,9 @@
     <div *ngIf="estaAutenticado()" class="icon user-icon" [matMenuTriggerFor]="userMenu">
       <i class="fas fa-user"></i>
     </div>
-    <div *ngIf="!estaAutenticado()" class="icon user-icon">
+    <div *ngIf="!estaAutenticado()">
       <a [routerLink]="'/login'">
-        <i class="fas fa-sign-in"></i>
+        <button class="botao-login">Login</button>
       </a>
     </div>
 

@@ -28,7 +28,7 @@
           <h4 class="subtitulo-filtro">Categoria</h4>
           <div class="opcoes-filtro">
             <mat-select class="opcao-filtro" placeholder="Selecionar" formControlName="productCategory">
-              <mat-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</mat-option>
+              <mat-option *ngFor="let categoria of categorias" [value]="categoria.key">{{categoria.value}}</mat-option>
             </mat-select>
           </div>
         </div>
@@ -91,7 +91,7 @@
               <button class="botao-favorito" title="Adicionar à lista de desejos">
                 <i class="far fa-heart"></i>
               </button>
-              <button class="botao-adicionar">
+              <button (click)="abrirPopupProduto(produto)" class="botao-adicionar" [ngClass]="{'disabled': !estaAutenticado()}" [title]="!estaAutenticado() ? 'Faça login' : 'Adicionar ao carrinho'">
                 <i class="fas fa-shopping-cart"></i> Adicionar
               </button>
             </div>

@@ -32,7 +32,6 @@ body {
   background: #004e98;
 }
 
-/* Header styles */
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -126,3 +125,13 @@ body {
 ::ng-deep .user-menu {
   background-color: white !important;
 }
+
+.botao-login {
+  color: #343a3f;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+}
+

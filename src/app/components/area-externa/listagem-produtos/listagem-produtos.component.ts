@@ -8,6 +8,9 @@ import { UrlProdutos } from "../../../core/routes/produtos-url";
 import { StringHelper } from "../../../helpers/string-helper";
 import { SpinnerComponent } from "../../../shared/spinner/spinner.component";
 import { ApiService } from "../../../core/services/api.service";
+import { AuthService } from "../../../auth/auth.service";
+import { AdicionarCarrinhoDialogComponent } from "../../area-interna/adicionar-carrinho-dialog/adicionar-carrinho-dialog.component";
+import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 
 
 @Component({
@@ -21,19 +24,19 @@ import { ApiService } from "../../../core/services/api.service";
     MatSelectModule,
     MatOptionModule,
     SpinnerComponent,
+    MatDialogModule,
   ],
 })
 export class ListagemProdutosComponent implements OnInit {
   produtos: Produto[] = [];
   marcas: string[] = [];
-  categorias = ['Bases', 'Batons', 'Máscaras', 'Blushes', 'Paletas'];
+  categorias : { key: string; value: string }[] = [];
   tags: { key: string; value: string }[] = [];
   carregando = false;
-
   filtersForm!: FormGroup;
   nenhumResultado: boolean = false;
 
-  constructor(private fb: FormBuilder, private ApiService: ApiService) {}
+  constructor(private dialog: MatDialog, private fb: FormBuilder, private ApiService: ApiService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.construirFormulario();
@@ -43,6 +46,11 @@ export class ListagemProdutosComponent implements OnInit {
   onSubmit() {
     this.obterProdutos();
   }
+
+  estaAutenticado(){
+    return this.authService.isAuthenticated()
+  }
+
   construirFormulario() {
     this.filtersForm = this.fb.group({
       brand: this.fb.control(''),
@@ -87,7 +95,21 @@ export class ListagemProdutosComponent implements OnInit {
       },
     });
   }
-  obterCategorias() {}
+
+  obterCategorias() {
+    this.ApiService.getCategorias().subscribe({
+      next: (categorias) => {
+        this.categorias = Object.keys(categorias).map((key) => ({
+          key: key,
+          value: categorias[key],
+        }));
+      },
+      error: (err) => {
+        console.error('Erro ao carregar tags:', err);
+        this.categorias = [];
+      },
+    });
+  }
 
   formatarPreco = (price: string | null | undefined): string | null => {
     return price ? price.split('$')[1].trim() : null;
@@ -123,5 +145,12 @@ export class ListagemProdutosComponent implements OnInit {
     this.filtersForm.markAsPristine();
     this.filtersForm.markAsUntouched();
     this.obterProdutos();
+  }
+
+  abrirPopupProduto(produto: Produto){
+    const dialogRef = this.dialog.open(AdicionarCarrinhoDialogComponent, {
+      height: 'auto',
+      data: produto
+    });
   }
 }
