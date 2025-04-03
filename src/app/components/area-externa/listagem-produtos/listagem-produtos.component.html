@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="filtros-container">
+    <form [formGroup]="filtersForm" (ngSubmit)="onSubmit()">
+      <div class="secao-filtros">
+        <h3 class="titulo-filtro">Filtrar Produtos</h3>
+
+        <div class="grupo-filtro">
+          <h4 class="subtitulo-filtro">Marca</h4>
+          <div class="opcoes-filtro">
+            <mat-select class="opcao-filtro" placeholder="Selecionar" formControlName="brand">
+              <mat-option *ngFor="let marca of marcas" [value]="marca">{{marca}}</mat-option>
+            </mat-select>
+          </div>
+        </div>
+
+        <div class="grupo-filtro">
+          <h4 class="subtitulo-filtro">Faixa de Preço</h4>
+          <div class="faixa-preco">
+            <div class="inputs-preco">
+              <input type="number" formControlName="priceGreaterThan" placeholder="Mínimo"/>
+              <span> - </span>
+              <input type="number" formControlName="priceLessThan" placeholder="Máximo"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="grupo-filtro">
+          <h4 class="subtitulo-filtro">Categoria</h4>
+          <div class="opcoes-filtro">
+            <mat-select class="opcao-filtro" placeholder="Selecionar" formControlName="productCategory">
+              <mat-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</mat-option>
+            </mat-select>
+          </div>
+        </div>
+
+        <div class="grupo-filtro">
+          <h4 class="subtitulo-filtro">Tags</h4>
+          <div class="container-tags">
+            <mat-select class="opcao-filtro" placeholder="Selecionar" formControlName="productTags" multiple>
+              <mat-option *ngFor="let tag of tags" [value]="tag.key">{{tag.value}}</mat-option>
+            </mat-select>
+          </div>
+        </div>
+
+        <div class="acoes-filtro">
+          <button type="button" class="botao-reset" (click)="resetarFiltros()">
+            <i class="fas fa-redo"></i> Limpar Filtros
+          </button>
+          <button type="submit" class="botao-aplicar">
+            <i class="fas fa-filter"></i> Aplicar Filtros
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="container-produtos">
+    <app-spinner *ngIf="carregando"></app-spinner>
+    <div *ngIf="!carregando && produtos.length > 0" class="grade-produtos">
+      <div *ngFor="let produto of produtos" class="card-produto">
+        <div class="container-imagem-produto">
+          <img [src]="produto.api_featured_image" [alt]="produto.name" class="imagem-produto"
+            (error)="produto.image_link = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTC_13ebLeTd0rsVIplte6zH-EEqleIiGuw6A&s'" />
+          <div *ngIf="produto.rating" class="avaliacao-produto">
+            <span class="valor-avaliacao">{{ produto.rating }}</span>
+            <i class="fas fa-star"></i>
+          </div>
+        </div>
+
+        <div class="conteudo-produto">
+          <div class="cabecalho-produto">
+            <h2 class="nome-produto">{{ produto.name }}</h2>
+            <span class="marca-produto">{{ produto.brand }}</span>
+          </div>
+
+          <p class="descricao-produto">{{ produto.description || 'Descrição não disponível' }}</p>
+
+          <div class="cores-produto" *ngIf="produto.product_colors?.length">
+            <div class="pontos-cor">
+              <div *ngFor="let cor of produto.product_colors | slice:0:4" class="ponto-cor"
+                [style.background-color]="cor.hex_value" [title]="cor.colour_name">
+              </div>
+            </div>
+            <span *ngIf="produto.product_colors?.length! > 4" class="contador-cores">
+              +{{ produto.product_colors.length - 4 }} cores
+            </span>
+          </div>
+
+          <div class="rodape-produto">
+            <span class="preco-produto">{{ produto.price | currency:'$ ' }}</span>
+            <div class="acoes-produto">
+              <button class="botao-favorito" title="Adicionar à lista de desejos">
+                <i class="far fa-heart"></i>
+              </button>
+              <button class="botao-adicionar">
+                <i class="fas fa-shopping-cart"></i> Adicionar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!carregando && nenhumResultado" class="no-results-container">
+      <div class="icon">
+        <i class="fas fa-search"></i>
+      </div>
+      <h2 style="color: #343a40;">Nenhum resultado encontrado</h2>
+      <p style="color: #6c757d;">Não encontramos resultados para a sua busca. Tente ajustar os filtros ou o termo
+        pesquisado.</p>
+    </div>
+  </div>
+</div>

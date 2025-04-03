@@ -1,0 +1,31 @@
+<div class="header-container">
+  <a href="#" class="logo">Desafio Maquiagem</a>
+  <div class="icons">
+    <div class="icon">
+      <i class="fas fa-search"></i>
+    </div>
+    <div class="icon">
+      <i class="fas fa-heart"></i>
+      <span class="icon-badge">2</span>
+    </div>
+    <div class="icon">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="icon-badge">3</span>
+    </div>
+    <div *ngIf="estaAutenticado()" class="icon user-icon" [matMenuTriggerFor]="userMenu">
+      <i class="fas fa-user"></i>
+    </div>
+    <div *ngIf="!estaAutenticado()" class="icon user-icon">
+      <a [routerLink]="'/login'">
+        <i class="fas fa-sign-in"></i>
+      </a>
+    </div>
+
+    <mat-menu class="user-menu" #userMenu="matMenu">
+      <button mat-menu-item routerLink="/meu-usuario">Meu usuário</button>
+      <button mat-menu-item routerLink="/meus-pedidos">Meus pedidos</button>
+      <button mat-menu-item (click)="logout()">Sair</button>
+    </mat-menu>
+
+  </div>
+</div>

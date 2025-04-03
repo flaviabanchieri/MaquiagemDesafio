@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Moderno</title>
+  <link rel="stylesheet" href="login.component.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-header">
+      <h1>Bem-vindo de volta</h1>
+      <p>Faça login para acessar sua conta.</p>
+    </div>
+    <form [formGroup]="loginForm" class="login-form">
+      <div class="input-group">
+        <label for="username">E-mail</label>
+        <input formControlName="user" type="email" id="email" placeholder="Digite seu e-mail" required>
+
+        <div style="color: #ff4d4d; font-size: 12px; margin-top: 5px;">
+          <span *ngIf="usuarioVazio">E-mail é obrigatório.</span>
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="password">Senha</label>
+        <input formControlName="password" type="password" id="password" placeholder="Digite sua senha" required>
+
+        <div style="color: #ff4d4d; font-size: 12px; margin-top: 5px;">
+          <span *ngIf="senhaVazia">Senha é obrigatória.</span>
+          <span *ngIf="senhaIncorreta">Usuário ou Senha Inválidos</span>
+        </div>
+      </div>
+      <button type="submit" class="login-button" (click)="onSubmit($event)">Entrar</button>
+    </form>
+    <div class="login-footer">
+      <p>Não tem uma conta? <a href="#">Cadastre-se</a></p>
+      <p><a href="#">Esqueceu a senha?</a></p>
+    </div>
+  </div>
+</body>
+</html>
