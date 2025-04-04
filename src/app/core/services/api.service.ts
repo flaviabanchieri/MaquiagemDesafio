@@ -63,6 +63,14 @@ export class ApiService {
       .pipe(map((res) => res));
   }
 
+  deleteItem(caminho: string, id: number) {
+    return this.http
+      .delete(`${this.apiUrl}${caminho}/${id}`, {
+        headers: Helpers.getHttpHeaders(),
+      })
+      .pipe(map((res) => res));
+  }
+
   private prepararParametros(filtro: any): string {
     if (!filtro) return '';
 

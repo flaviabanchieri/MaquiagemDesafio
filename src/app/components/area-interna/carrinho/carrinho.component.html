@@ -1,7 +1,7 @@
 <div class="carrinho-container" *ngIf="produtos.length; else vazio">
   <h2>Meu Carrinho</h2>
 
-  <div class="produto" *ngFor="let carrinho of produtos">
+  <div class="produto" *ngFor="let carrinho of compra.carrinho">
     <img class="imagem-produto " [src]="carrinho.produto.api_featured_image"  />
     <div class="detalhes">
       <div class="topo">

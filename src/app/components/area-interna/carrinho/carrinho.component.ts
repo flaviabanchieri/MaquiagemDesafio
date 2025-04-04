@@ -19,6 +19,7 @@ import { CompraItem } from '../../../core/models/compra-item';
 })
 export class CarrinhoComponent implements OnInit {
   produtos: Carrinho[] = [];
+  compra: Compras = new Compras();
 
   constructor(
     private apiService: ApiService,
@@ -34,6 +35,8 @@ export class CarrinhoComponent implements OnInit {
     this.apiService.getItems<Carrinho[]>('carrinho').subscribe({
       next: (produtos: Carrinho[]) => {
         this.produtos = produtos;
+        this.compra.metodoPagamento = 0;
+        this.compra.carrinho.push(...this.produtos);
       },
       error: () => {
         this.produtos = [];
@@ -59,24 +62,34 @@ export class CarrinhoComponent implements OnInit {
   }
 
   removerProduto(produto: Carrinho): void {
-    this.produtos = this.produtos.filter((p) => p.id !== produto.id);
-    this.snackBar.open('Produto removido do carrinho.', 'Fechar', {
-      duration: 2000,
+    this.apiService.deleteItem('carrinho', produto.id).subscribe({
+      next: () => {
+        this.snackBar.open('Produto removido do carrinho.', 'Fechar', {
+          duration: 2000,
+        });
+        this.carregarCarrinho();
+      },
+      error: () => {
+        this.snackBar.open('Erro ao remover o produto.', 'Fechar', {
+          duration: 2000,
+        });
+      }
     });
   }
 
   finalizarCompra(): void {
-    var compra: Compras = new Compras();
-    compra.carrinho = this.produtos;
-    compra.metodoPagamento = 0;
-    compra.usuarioId = 0;
-    compra.comprasItens = [];
+    this.compra.metodoPagamento = 0;
+    this.compra.usuarioId = 0;
+    this.compra.comprasItens = [];
     this.apiService
-      .postItems('compras', compra)
+      .postItems('compras', this.compra)
       .pipe(
         map((response: any) => {
           if (response) {
-            this.router.navigate(['/pagamento', response?.comprasItens[0]?.compraId]);
+            this.router.navigate([
+              '/pagamento',
+              response?.comprasItens[0]?.compraId,
+            ]);
             this.snackBar.open('Compra finalizada com sucesso!', 'Fechar', {
               duration: 3000,
             });
