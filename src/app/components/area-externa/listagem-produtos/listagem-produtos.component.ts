@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder } from "@angular/forms";
@@ -37,7 +38,7 @@ export class ListagemProdutosComponent implements OnInit {
   filtersForm!: FormGroup;
   nenhumResultado: boolean = false;
 
-  constructor(private router: Router, private dialog: MatDialog, private fb: FormBuilder, private ApiService: ApiService, private authService: AuthService) {}
+  constructor(private snackBar: MatSnackBar, private router: Router, private dialog: MatDialog, private fb: FormBuilder, private ApiService: ApiService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.construirFormulario();
@@ -151,10 +152,17 @@ export class ListagemProdutosComponent implements OnInit {
     this.obterProdutos();
   }
 
-  abrirPopupProduto(produto: Produto){
+  abrirPopupProduto(produto: Produto) {
     const dialogRef = this.dialog.open(AdicionarCarrinhoDialogComponent, {
-      height: 'auto',
+      height: '85vh',
       data: produto
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.estaAutenticado();
+      if(!this.estaAutenticado()){
+        this.snackBar.open("Precisa fazer login novamente")
+      }
     });
   }
 }

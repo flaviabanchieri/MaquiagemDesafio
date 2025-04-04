@@ -36,9 +36,7 @@ export class AdicionarCarrinhoDialogComponent implements OnInit {
 
   selecionarCor(hex: string) {
     if(this.coresSelecionadasHex.length == this.quantidade){
-      this.snackBar.open('Quantidade atingida', 'Fechar', {
-        duration: 3000
-      });
+      this.snackBar.open('Quantidade atingida')
       return
     }
     const index = this.coresSelecionadasHex.indexOf(hex);
@@ -78,14 +76,16 @@ export class AdicionarCarrinhoDialogComponent implements OnInit {
     carrinho.quantidade = this.quantidade;
     this.apiService.postItems('carrinho', carrinho).pipe(
       map((response: any) => {
-        this.snackBar.open('Produto criado com sucesso!', 'Fechar', {
-          duration: 3000
-        });
+        this.snackBar.open('Produto criado com sucesso!');
         this.dialogRef.close();
         return { status: 200, mensagem: 'Adicionado no carrinho' };
       }),
       catchError((error: HttpErrorResponse) => {
         console.error('Erro na requisição:', error);
+        if(error.status == 401){
+          localStorage.removeItem('token');
+          this.dialogRef.close();
+        }
         return of({ status: error.status, mensagem: error.error?.mensagem || 'Erro desconhecido' });
       })
     ).subscribe();

@@ -1,5 +1,6 @@
 .container{
   padding: 20px;
+  overflow-y: scroll;
 }
 
 .container-produtos {
@@ -107,9 +108,6 @@
   margin-top: 0.5rem;
 }
 
-.snackbar-success{
-  background-color: rgba(116, 228, 116, 0.637);
-}
 .quantidade-produto label {
   font-size: 0.9rem;
   color: #333;
