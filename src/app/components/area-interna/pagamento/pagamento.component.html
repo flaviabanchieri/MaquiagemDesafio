@@ -1,13 +1,17 @@
 <div class="pagamento-container">
   <h2>Finalizar Pagamento</h2>
 
+  <div class="valor-total">
+    Total a pagar: <strong>{{ valorTotal | currency:'$':'symbol-narrow' }}</strong>
+  </div>
+
   <div class="metodos-pagamento">
-    <label>
+    <label [class.selecionado]="metodoPagamento === 1">
       <input type="radio" name="pagamento" [value]="1" [(ngModel)]="metodoPagamento" />
       <i class="fas fa-money-bill-wave"></i> Dinheiro
     </label>
 
-    <label>
+    <label [class.selecionado]="metodoPagamento === 2">
       <input type="radio" name="pagamento" [value]="2" [(ngModel)]="metodoPagamento" />
       <i class="fas fa-qrcode"></i> Pix
     </label>
@@ -15,8 +19,14 @@
 
   <div *ngIf="metodoPagamento === 2" class="pix-container">
     <p>Escaneie o QR Code para pagar com Pix:</p>
-    <img [src]="'https://www.qrcoder.co.uk/assets/img/random-qr-code.png'" alt="QR Code Pix" />
+    <img
+      src="https://www.qrcoder.co.uk/assets/img/random-qr-code.png"
+      alt="QR Code Pix"
+      class="qr-code"
+    />
   </div>
 
-  <button class="botao-confirmar" (click)="confirmarPagamento()">Confirmar Pagamento</button>
+  <button class="botao-confirmar" (click)="confirmarPagamento()">
+    Confirmar Pagamento
+  </button>
 </div>

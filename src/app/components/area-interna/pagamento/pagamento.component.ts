@@ -20,6 +20,7 @@ export class PagamentoComponent implements OnInit {
   troco: number = 0;
   id!: number;
   compra!: Compras;
+  valorTotal = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -51,6 +52,7 @@ export class PagamentoComponent implements OnInit {
         next: (compra: Compras) => {
           console.log(compra)
           this.compra = compra;
+          this.valorTotal = compra.valorTotal;
         },
         error: () => {
           alert('Erro ao carregar a compra.');

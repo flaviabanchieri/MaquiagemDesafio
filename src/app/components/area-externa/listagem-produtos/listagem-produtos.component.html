@@ -16,18 +16,41 @@
         <div class="grupo-filtro">
           <h4 class="subtitulo-filtro">Faixa de Preço</h4>
           <div class="faixa-preco">
-            <div class="inputs-preco">
-              <div class="input-com-simbolo">
-                <span>$</span>
-                <input type="number" formControlName="priceGreaterThan" placeholder="Mínimo" step="1" min="0" />
-              </div>
+            <label>Faixa de Preço</label>
 
-              <span class="separador"> - </span>
+            <div class="slider-container">
+              <!-- Slider Mínimo -->
+              <input
+                type="range"
+                class="slider thumb-left"
+                [min]="min"
+                [max]="max"
+                [(ngModel)]="minPrice"
+                [ngModelOptions]="{standalone: true}"
+                (change)="validateMin()"
+              />
 
-              <div class="input-com-simbolo">
-                <span>$</span>
-                <input type="number" formControlName="priceLessThan" placeholder="Máximo" step="1" min="0" />
-              </div>
+              <!-- Slider Máximo -->
+              <input
+                type="range"
+                class="slider thumb-right"
+                [min]="min"
+                [max]="max"
+                [(ngModel)]="maxPrice"
+                [ngModelOptions]="{standalone: true}"
+                (change)="validateMax()"
+              />
+
+              <!-- Trilha cinza -->
+              <div class="slider-track"></div>
+
+              <!-- Trilha verde (selecionada) -->
+              <div class="slider-range" [ngStyle]="rangeStyle"></div>
+            </div>
+
+            <!-- Valores selecionados -->
+            <div class="valores-range">
+              R$ {{ minPrice }} - R$ {{ maxPrice }}
             </div>
           </div>
         </div>
@@ -94,10 +117,15 @@
           </div>
 
           <div class="rodape-produto">
-            <span class="preco-produto">{{ produto.price | currency:'$ ' }}</span>
+            <span class="preco-produto" [ngClass]="{ 'indisponivel': produto.price == '0.0' }">
+              {{ produto.price | currency:'$ ' }}
+            </span>
             <div class="acoes-produto">
-              <button (click)="adicionarAoCarrinho(produto)" class="botao-adicionar" [ngClass]="{'disabled': !estaAutenticado()}" [title]="!estaAutenticado() ? 'Faça login' : 'Adicionar ao carrinho'">
+              <button *ngIf="produto.price != '0.0'" (click)="adicionarAoCarrinho(produto)" class="botao-adicionar" [ngClass]="{'disabled': !estaAutenticado()}" [title]="!estaAutenticado() ? 'Faça login' : 'Adicionar ao carrinho'">
                 <i class="fas fa-shopping-cart"></i> Adicionar
+              </button>
+              <button *ngIf="produto.price == '0.0'" class="botao-adicionar-indisponivel">
+                Produto indisponivel
               </button>
             </div>
           </div>

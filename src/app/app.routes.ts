@@ -40,5 +40,5 @@ export const routes: Routes = [
 
   // Página de erro
   { path: '404', component: PaginaErroComponent },
-  { path: '**', redirectTo: '/404' }
+  { path: '**', redirectTo: '/login' }
 ];

@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { AuthService } from "../../../auth/auth.service";
-import { Router } from "@angular/router";
+import { Router, RouterModule } from "@angular/router";
 import { ApiService } from "../../../core/services/api.service";
 import { HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, of } from 'rxjs';
@@ -13,7 +13,7 @@ import { map, catchError, of } from 'rxjs';
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
   styleUrls: ['./cadastro.component.css'],
-  imports: [ReactiveFormsModule, CommonModule]
+  imports: [ReactiveFormsModule, CommonModule, RouterModule]
 })
 export class CadastroComponent implements OnInit {
   loginForm: FormGroup;

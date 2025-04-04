@@ -5,7 +5,7 @@
     <div class="compra-card" *ngFor="let compra of compras" (click)="irParaPagamento(compra)">
       <div class="compra-header">
         <span class="data-compra">
-          <i class="fas fa-calendar-alt"></i> {{ compra.dataCriacao | date:'dd/MM/yyyy' }}
+          <i class="fas fa-calendar-alt"></i> {{ compra.dataCriacao | date:'dd/MM/yyyy HH:mm' }}
         </span>
         <span class="total-compra">Total: {{ calcularTotal(compra) | currency:'$' }}</span>
       </div>
