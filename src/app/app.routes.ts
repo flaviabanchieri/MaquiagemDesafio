@@ -34,7 +34,7 @@ export const routes: Routes = [
     children: [
       { path: 'carrinho', component: CarrinhoComponent, data: { title: 'Meu Carrinho' } },
       { path: 'pedidos', component: MeusPedidosComponent, data: { title: 'Meus Pedidos' } },
-      { path: 'pagamento', component: PagamentoComponent, data: { title: 'Pagamento' } }
+      { path: 'pagamento/:id', component: PagamentoComponent, data: { title: 'Pagamento' } }
     ]
   },
 

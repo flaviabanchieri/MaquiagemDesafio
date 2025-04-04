@@ -35,6 +35,14 @@ export class AdicionarCarrinhoDialogComponent implements OnInit {
   }
 
   selecionarCor(hex: string) {
+    if(this.coresSelecionadasHex.length == this.quantidade){
+      this.snackBar.open('Quantidade atingida', 'Fechar', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top'
+      });
+      return
+    }
     const index = this.coresSelecionadasHex.indexOf(hex);
     if (index !== -1) {
       this.coresSelecionadasHex.splice(index, 1);
@@ -65,11 +73,10 @@ export class AdicionarCarrinhoDialogComponent implements OnInit {
     carrinho.quantidade = this.quantidade;
     this.apiService.postItems('carrinho', carrinho).pipe(
       map((response: any) => {
-        this.snackBar.open('Produto criado com sucesso!', 'null', {
+        this.snackBar.open('Produto criado com sucesso!', 'Fechar', {
           duration: 3000,
           horizontalPosition: 'right',
-          verticalPosition: 'top',
-          panelClass: ['snackbar-success']
+          verticalPosition: 'top'
         });
         this.dialogRef.close();
         return { status: 200, mensagem: 'Adicionado no carrinho' };
@@ -78,7 +85,7 @@ export class AdicionarCarrinhoDialogComponent implements OnInit {
         console.error('Erro na requisição:', error);
         return of({ status: error.status, mensagem: error.error?.mensagem || 'Erro desconhecido' });
       })
-    ).subscribe();;
+    ).subscribe();
   }
 
 }

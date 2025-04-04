@@ -1,0 +1,93 @@
+.pagamento-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: #333;
+  }
+
+  .metodos-pagamento {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    input {
+      accent-color: #27ae60;
+      transform: scale(1.2);
+    }
+  }
+
+  .campo-valor {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+
+    label {
+      font-weight: bold;
+      color: #333;
+    }
+
+    input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    p {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #27ae60;
+    }
+  }
+
+  .pix-container {
+    margin-bottom: 20px;
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    img {
+      width: 150px;
+      height: 150px;
+      border-radius: 5px;
+      border: 2px solid #ccc;
+    }
+  }
+
+  .botao-confirmar {
+    width: 100%;
+    background: #2980b9;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    transition: background 0.3s;
+
+    &:hover {
+      background: #1f6697;
+    }
+  }
+}
+

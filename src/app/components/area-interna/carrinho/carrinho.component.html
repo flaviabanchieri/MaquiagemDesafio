@@ -9,7 +9,7 @@
           <h3>{{ carrinho.produto.name }}</h3>
           <small>{{ carrinho.produto.brand }}</small>
         </div>
-        <button class="remover" (click)="remover(carrinho)">
+        <button class="remover" (click)="removerProduto(carrinho)">
           <i class="fas fa-trash-alt"></i>
         </button>
       </div>
@@ -24,9 +24,9 @@
 
 
       <div class="quantidade">
-        <button (click)="diminuir(carrinho)">−</button>
+        <button (click)="diminuirQuantidade(carrinho)">−</button>
         <span>{{ carrinho.quantidade }}</span>
-        <button (click)="aumentar(carrinho)">+</button>
+        <button (click)="aumentarQuantidade(carrinho)">+</button>
       </div>
 
       <div class="preco">
@@ -40,7 +40,7 @@
     <strong>{{ total | currency:'BRL' }}</strong>
   </div>
 
-  <button class="finalizar">Finalizar Compra</button>
+  <button (click)="finalizarCompra()" class="finalizar">Finalizar Compra</button>
 </div>
 
 <ng-template #vazio>
