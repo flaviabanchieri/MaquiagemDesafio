@@ -179,6 +179,8 @@ export class ListagemProdutosComponent implements OnInit {
     this.filtersForm.reset();
     this.filtersForm.markAsPristine();
     this.filtersForm.markAsUntouched();
+    this.maxPrice = 70,
+    this.minPrice = 0,
     this.obterProdutos();
   }
 
