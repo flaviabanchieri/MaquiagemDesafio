@@ -67,6 +67,8 @@ export class CarrinhoComponent implements OnInit {
         this.snackBar.open('Produto removido do carrinho.', 'Fechar', {
           duration: 2000,
         });
+        this.produtos = [];
+        this.compra.carrinho = [];
         this.carregarCarrinho();
       },
       error: () => {

@@ -1,31 +1,22 @@
 <div class="pagamento-container">
   <h2>Finalizar Pagamento</h2>
 
-  <!-- Seleção de método de pagamento -->
   <div class="metodos-pagamento">
     <label>
-      <input type="radio" name="pagamento" value="dinheiro" [(ngModel)]="metodoPagamento" />
+      <input type="radio" name="pagamento" [value]="1" [(ngModel)]="metodoPagamento" />
       <i class="fas fa-money-bill-wave"></i> Dinheiro
     </label>
 
     <label>
-      <input type="radio" name="pagamento" value="pix" [(ngModel)]="metodoPagamento" />
+      <input type="radio" name="pagamento" [value]="2" [(ngModel)]="metodoPagamento" />
       <i class="fas fa-qrcode"></i> Pix
     </label>
   </div>
 
-  <div *ngIf="metodoPagamento === 'dinheiro'" class="campo-valor">
-    <label>Valor entregue:</label>
-    <input type="number" [(ngModel)]="valorEntregue" (change)="calcularTroco()" />
-    <p *ngIf="troco >= 0">Troco: {{ troco | currency:'BRL' }}</p>
-  </div>
-
-  <!-- QR Code para pagamento via Pix -->
-  <div *ngIf="metodoPagamento === 'pix'" class="pix-container">
+  <div *ngIf="metodoPagamento === 2" class="pix-container">
     <p>Escaneie o QR Code para pagar com Pix:</p>
     <img [src]="'https://www.qrcoder.co.uk/assets/img/random-qr-code.png'" alt="QR Code Pix" />
   </div>
 
-  <!-- Botão de confirmação -->
   <button class="botao-confirmar" (click)="confirmarPagamento()">Confirmar Pagamento</button>
 </div>

@@ -24,8 +24,12 @@ export class HeaderComponent implements OnInit {
     return this.authService.isAuthenticated()
   }
 
+  navegar(route: string){
+    this.router.navigate([route])
+  }
+
   logout() {
     this.authService.logout();
-    this.router.navigate(['/listagem'])
+    this.router.navigate(['/home'])
   }
 }

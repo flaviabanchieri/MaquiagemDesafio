@@ -11,6 +11,7 @@ import { ApiService } from "../../../core/services/api.service";
 import { AuthService } from "../../../auth/auth.service";
 import { AdicionarCarrinhoDialogComponent } from "../../area-interna/adicionar-carrinho-dialog/adicionar-carrinho-dialog.component";
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -36,7 +37,7 @@ export class ListagemProdutosComponent implements OnInit {
   filtersForm!: FormGroup;
   nenhumResultado: boolean = false;
 
-  constructor(private dialog: MatDialog, private fb: FormBuilder, private ApiService: ApiService, private authService: AuthService) {}
+  constructor(private router: Router, private dialog: MatDialog, private fb: FormBuilder, private ApiService: ApiService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.construirFormulario();
@@ -111,14 +112,10 @@ export class ListagemProdutosComponent implements OnInit {
     });
   }
 
-  formatarPreco = (price: string | null | undefined): string | null => {
-    return price ? price.split('$')[1].trim() : null;
-  };
-
   obterProdutos() {
     var filtros = this.filtersForm.value;
-    filtros.priceGreaterThan = this.formatarPreco(filtros.priceGreaterThan);
-    filtros.priceLessThan = this.formatarPreco(filtros.priceLessThan);
+    filtros.priceGreaterThan = filtros.priceGreaterThan;
+    filtros.priceLessThan = filtros.priceLessThan;
     this.carregando = true;
     if ((this.nenhumResultado = true)) this.nenhumResultado = false;
     this.ApiService.getFiltro<Produto[]>(
@@ -137,6 +134,14 @@ export class ListagemProdutosComponent implements OnInit {
         this.carregando = false;
       },
     });
+  }
+
+  adicionarAoCarrinho(produto: Produto){
+    if(this.estaAutenticado()){
+      this.abrirPopupProduto(produto);
+    } else {
+      this.router.navigate(['/login'])
+    }
   }
 
   resetarFiltros(): void {

@@ -14,8 +14,8 @@ export const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: 'listagem', component: ListagemProdutosComponent, data: { title: 'Produtos' } },
-      { path: '', redirectTo: '/listagem', pathMatch: 'full' }
+      { path: 'home', component: ListagemProdutosComponent, data: { title: 'Produtos' } },
+      { path: '', redirectTo: '/home', pathMatch: 'full' }
     ]
   },
   {

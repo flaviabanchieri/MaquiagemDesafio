@@ -1,0 +1,121 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+/* Título */
+h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Exibição em lista */
+.compras-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Cartão de compra */
+.compra-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.compra-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Cabeçalho da compra */
+.compra-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.compra-header .data-compra {
+  font-size: 14px;
+  color: #777;
+}
+
+.compra-header .total-compra {
+  font-size: 16px;
+  font-weight: bold;
+  color: #222;
+}
+
+/* Ícone de data */
+.data-compra i {
+  margin-right: 5px;
+  color: #007bff;
+}
+
+/* Método de pagamento */
+.metodo-pagamento {
+  font-size: 14px;
+  color: #555;
+  background: #f3f3f3;
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* Lista de produtos */
+.produtos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Produto dentro da compra */
+.produto {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  background: #f9f9f9;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Imagem do produto */
+.produto-img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 15px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.produto-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.produto-info h4 {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.produto-info p {
+  font-size: 14px;
+  color: #555;
+}

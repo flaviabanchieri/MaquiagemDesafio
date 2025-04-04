@@ -33,9 +33,6 @@
     <div class="rodape-produto">
       <span class="preco-produto">{{ produto.price | currency:'$ ' }}</span>
       <div class="acoes-produto">
-        <button class="botao-favorito" title="Adicionar à lista de desejos">
-          <i class="far fa-heart"></i>
-        </button>
         <button (click)="adicionar()" class="botao-adicionar">
           <i class="fas fa-shopping-cart"></i> Adicionar
         </button>

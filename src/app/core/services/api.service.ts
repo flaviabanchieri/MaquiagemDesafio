@@ -71,6 +71,14 @@ export class ApiService {
       .pipe(map((res) => res));
   }
 
+  patchItem(caminho: string, body: any) {
+    return this.http
+      .patch(this.apiUrl + caminho, body, {
+        headers: Helpers.getHttpHeaders(),
+      })
+      .pipe(map((res) => res));
+  }
+
   private prepararParametros(filtro: any): string {
     if (!filtro) return '';
 

@@ -1,29 +1,26 @@
 <div class="header-container">
   <a href="#" class="logo">Desafio Maquiagem</a>
-  <div class="icons">
-    <div class="icon">
+  <div  class="icons">
+    <div (click)="navegar('/home')" class="icon">
       <i class="fas fa-search"></i>
     </div>
-    <div [routerLink]="'/favoritos'" class="icon">
-      <i class="fas fa-heart"></i>
-      <span class="icon-badge">2</span>
+    <div (click)="navegar('/pedidos')"  class="icon">
+      <i class="fas fa-receipt"></i>
     </div>
-    <div [routerLink]="'/carrinho'" class="icon">
+    <div (click)="navegar('/carrinho')"  class="icon">
       <i class="fas fa-shopping-cart"></i>
-      <span class="icon-badge">3</span>
     </div>
     <div *ngIf="estaAutenticado()" class="icon user-icon" [matMenuTriggerFor]="userMenu">
       <i class="fas fa-user"></i>
     </div>
     <div *ngIf="!estaAutenticado()">
-      <a [routerLink]="'/login'">
+      <a (click)="navegar('/login')" >
         <button class="botao-login">Login</button>
       </a>
     </div>
 
     <mat-menu class="user-menu" #userMenu="matMenu">
-      <button mat-menu-item routerLink="/meu-usuario">Meu usuário</button>
-      <button mat-menu-item routerLink="/meus-pedidos">Meus pedidos</button>
+      <button mat-menu-item routerLink="/pedidos">Meus pedidos</button>
       <button mat-menu-item (click)="logout()">Sair</button>
     </mat-menu>
 

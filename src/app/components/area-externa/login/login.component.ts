@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 
         if (response.status === 200) {
           this.senhaIncorreta = false;
-          this.router.navigate(['/listagem']);
+          this.router.navigate(['/home']);
         } else {
           this.senhaIncorreta = true;
         }

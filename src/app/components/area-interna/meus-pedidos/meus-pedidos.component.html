@@ -1,3 +1,30 @@
-<p>
-  meus-pedidos works!
-</p>
+<div class="container">
+  <h2>Minhas Compras</h2>
+
+  <div class="compras-container">
+    <div class="compra-card" *ngFor="let compra of compras" (click)="irParaPagamento(compra)">
+      <div class="compra-header">
+        <span class="data-compra">
+          <i class="fas fa-calendar-alt"></i> {{ compra.dataCriacao | date:'dd/MM/yyyy' }}
+        </span>
+        <span class="total-compra">Total: {{ calcularTotal(compra) | currency:'$' }}</span>
+      </div>
+
+      <div class="metodo-pagamento">
+        <strong>Método de pagamento:</strong> {{ obterMetodoPagamento(compra.metodoPagamento) }}
+      </div>
+
+      <div class="produtos">
+        <div class="produto" *ngFor="let item of compra.comprasItens">
+          <img class="produto-img" [src]="item.produto?.api_featured_image" alt="{{ item.produto?.name }}" />
+
+          <div class="produto-info">
+            <h4>{{ item.produto?.name }}</h4>
+            <p>{{ item.produto?.brand }}</p>
+            <p>Quantidade: {{ item.quantidade }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
