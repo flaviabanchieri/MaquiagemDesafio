@@ -12,4 +12,4 @@ LABEL projeto="maquiagem.flaviabanchieri.com"
 LABEL imagem="front"
 
 COPY .deploy/nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=compilador /app/dist/maquiagem-desafio /usr/share/nginx/html
+COPY --from=compilador /app/dist/maquiagem-desafio/browser /usr/share/nginx/html
