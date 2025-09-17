@@ -1,0 +1,14 @@
+services:
+
+  web:
+    image: maquiagem.flaviabanchieri.com/front
+    build:
+      context: ..
+      dockerfile: .deploy/Dockerfile
+    networks:
+      - net
+
+networks:
+  net:
+    name: npm
+    external: true
