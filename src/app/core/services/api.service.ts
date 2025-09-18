@@ -8,7 +8,7 @@ import { TagsDictionary } from '../models/tags';
   providedIn: 'root',
 })
 export class ApiService {
-  private readonly apiUrl = 'https://localhost:44370/api/';
+  private readonly apiUrl = 'https://maquiagens.viabit.com.br/api/';
 
   constructor(private http: HttpClient) {}
 
